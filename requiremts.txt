@@ -1,0 +1,7 @@
+# requirements.txt
+zeep==4.2.1
+python-dotenv==1.0.0
+sqlalchemy==2.0.25
+requests==2.31.0
+cryptography==42.0.5
+pandas

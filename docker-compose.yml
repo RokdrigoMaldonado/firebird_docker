@@ -1,0 +1,23 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  firebird:
+    image: jacobalberty/firebird:4.0
+    env_file: .env
+    container_name: firebird
+    ports:
+      - "3050:3050"
+    volumes:
+      - ./firebird_data:/firebird/data
+      - ./scripts:/docker-entrypoint-initdb.d 
+    environment:
+      - FIREBIRD_DATABASE=test1.fdb
+      - FIREBIRD_USER=${FIREBIRD_USER}
+      - FIREBIRD_PASSWORD=${FIREBIRD_PASSWORD}
+      - ISC_PASSWORD=${ISC_PASSWORD}
+    healthcheck:
+      test: ["CMD", "/docker-entrypoint-initdb.d/wait-for-firebird.sh"]
+    user: "0:0"
+    restart: unless-stopped
+
